@@ -1,0 +1,628 @@
+
+
+html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ElectroGear Shop</title>
+  <meta name="description" content="Phone accessories store: screen protectors, powerbanks, cables. Quick order via WhatsApp." />
+  <style>
+    :root{
+      --bg:#060812;
+      --card:rgba(15,18,34,.72);
+      --line:rgba(124,92,255,.22);
+      --text:#eef1ff;
+      --muted:#9aa3bd;
+      --brand:#7c5cff;
+      --brand2:#23e6a8;
+      --danger:#ff4d4f;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(124,92,255,.28), transparent 55%),
+        radial-gradient(900px 600px at 90% 10%, rgba(35,230,168,.18), transparent 58%),
+        radial-gradient(700px 500px at 40% 120%, rgba(92,192,255,.18), transparent 55%),
+        linear-gradient(180deg, #050612 0%, #070922 45%, #050612 100%);
+      overflow-x:hidden;
+    }
+
+    /* electronic circuit vibes */
+    .bg-grid{
+      position:fixed; inset:-40px;
+      pointer-events:none; z-index:-1;
+      background-image:
+        linear-gradient(to right, rgba(124,92,255,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(35,230,168,.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(600px 400px at 30% 10%, black 35%, transparent 70%);
+      opacity:.9;
+      transform: rotate(-2deg);
+    }
+    .bg-lines{
+      position:fixed; inset:0;
+      pointer-events:none; z-index:-1;
+      background:
+        repeating-linear-gradient(115deg,
+          rgba(124,92,255,.08) 0px,
+          rgba(124,92,255,.08) 1px,
+          transparent 1px,
+          transparent 22px);
+      opacity:.35;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0}
+    .logo{display:flex;align-items:center;gap:10px}
+    .badge{
+      width:40px;height:40px;border-radius:14px;
+      background:linear-gradient(135deg,var(--brand),#ff5cc8);
+      display:grid;place-items:center;
+      box-shadow:var(--shadow);
+      font-weight:900;
+      letter-spacing:.5px;
+    }
+    .brand{font-weight:900;letter-spacing:.3px}
+    .sub{color:var(--muted);font-size:13px;margin-top:2px}
+
+    .topright{display:flex;gap:10px;align-items:center}
+    .btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      transition:.15s ease;
+      font-weight:700;
+    }
+    .btn:hover{border-color:rgba(124,92,255,.6); transform: translateY(-1px)}
+    .btn.primary{border:0;background:linear-gradient(135deg,var(--brand),#5cc0ff);font-weight:900}
+    .btn.green{border:0;background:linear-gradient(135deg,var(--brand2),#2bb1ff);font-weight:900}
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
+      margin-top:6px;
+    }
+    .card{
+      background:var(--card);
+      backdrop-filter: blur(10px);
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+    }
+    .hero .left{padding:18px}
+    h1{margin:0 0 8px;font-size:30px;line-height:1.1}
+    .lead{color:var(--muted);margin:0 0 14px;font-size:14px;line-height:1.55}
+    .pillrow{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      background:rgba(255,255,255,.02);
+    }
+    .hero .right{padding:14px;display:flex;flex-direction:column;gap:10px}
+    .stat{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:12px 12px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.02)
+    }
+    .stat b{font-size:13px}
+    .stat span{color:var(--muted);font-size:12px}
+
+    .toolbar{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      margin:16px 0;
+    }
+    .search{flex:1;min-width:220px}
+    input,select,textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      padding:12px 12px;
+      border-radius:14px;
+      outline:none;
+    }
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .prod{padding:14px;display:flex;flex-direction:column;gap:10px}
+    .thumb{
+      height:140px;border-radius:16px;border:1px dashed rgba(124,92,255,.35);
+      background:
+        radial-gradient(120px 80px at 25% 25%, rgba(124,92,255,.35), transparent 70%),
+        radial-gradient(120px 80px at 75% 35%, rgba(35,230,168,.22), transparent 70%),
+        linear-gradient(135deg, rgba(124,92,255,.15), rgba(35,230,168,.10));
+      display:grid;place-items:center;font-weight:900;letter-spacing:.8px;
+      color:rgba(255,255,255,.92);
+      text-transform:uppercase;
+    }
+    .meta{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+    .title{font-weight:900}
+    .price{font-weight:900}
+    .desc{color:var(--muted);font-size:12px;line-height:1.35;min-height:34px}
+    .row{display:flex;gap:8px}
+    .qty{display:flex;gap:8px;align-items:center}
+    .qty button{
+      width:36px;height:36px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(255,255,255,.03);color:var(--text);cursor:pointer;
+    }
+    .qty button:hover{border-color:rgba(35,230,168,.7)}
+    .qty input{width:60px;text-align:center;padding:10px 8px}
+
+    /* Cart drawer */
+    .drawerback{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:flex-end;justify-content:center;padding:14px}
+    .drawer{width:min(920px,100%);max-height:86vh;overflow:auto}
+    .drawer header{padding:14px 14px;border-bottom:1px solid var(--line)}
+    .drawer main{padding:14px;display:grid;grid-template-columns:1.2fr .8fr;gap:12px}
+    .cartlist{display:flex;flex-direction:column;gap:10px}
+    .cartitem{
+      display:flex;gap:10px;align-items:center;justify-content:space-between;
+      padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02)
+    }
+    .cartitem .left{display:flex;gap:10px;align-items:center}
+    .mini{
+      width:44px;height:44px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(124,92,255,.35), rgba(35,230,168,.18));
+      border:1px solid rgba(124,92,255,.25);
+      display:grid;place-items:center;font-weight:900;
+    }
+    .cartitem .name{font-weight:900}
+    .cartitem .muted{color:var(--muted);font-size:12px}
+    .cartitem .right{display:flex;gap:8px;align-items:center}
+    .trash{border:1px solid rgba(255,77,79,.4);background:rgba(255,77,79,.10)}
+    .trash:hover{border-color:rgba(255,77,79,.95)}
+    .summary{
+      padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02)
+    }
+    .sumrow{display:flex;justify-content:space-between;gap:10px;margin:8px 0;color:var(--muted)}
+    .sumrow b{color:var(--text)}
+    .hr{height:1px;background:var(--line);margin:10px 0}
+    .small{font-size:12px;color:var(--muted);line-height:1.35}
+    footer{padding:18px 0;color:var(--muted);font-size:12px;text-align:center}
+
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .drawer main{grid-template-columns:1fr}
+    }
+    @media (max-width: 560px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:26px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-lines"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="badge">EG</div>
+        <div>
+          <div class="brand" id="shopName">FaezElectro Shop</div>
+          <div class="sub" id="shopTag">Accessories • Fast Order • WhatsApp Checkout</div>
+        </div>
+      </div>
+      <div class="topright">
+        <button class="btn" id="btnContact">WhatsApp: 017-778 2692</button>
+        <button class="btn primary" id="btnCart">Cart <span id="cartCount">0</span></button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="card left">
+        <h1 id="headline">Phone Accessories That Actually Sell — Fast.</h1>
+        <p class="lead" id="lead">
+          Screen protectors, powerbanks, cables & chargers. Pick items → add to cart → one-tap WhatsApp order.
+          Perfect for FB / Telegram / IG traffic.
+        </p>
+        <div class="pillrow">
+          <div class="pill">✅ Mobile-first</div>
+          <div class="pill">✅ Cash & carry / Delivery</div>
+          <div class="pill">✅ Bundle-friendly</div>
+          <div class="pill">✅ WhatsApp checkout</div>
+        </div>
+      </div>
+
+      <div class="card right">
+        <div class="stat"><b>Hot Items</b><span id="hotItem">Screen Protector / Powerbank</span></div>
+        <div class="stat"><b>Delivery</b><span id="shippingText">KL / Cheras / Ampang</span></div>
+        <div class="stat"><b>Payment</b><span id="payText">TNG / Bank Transfer / COD</span></div>
+        <button class="btn green" id="btnScroll">Shop Now</button>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="search">
+        <input id="q" placeholder="Search: protector / powerbank / cable / charger..." />
+      </div>
+      <div style="min-width:190px">
+        <select id="sort">
+          <option value="hot">Sort: Recommended</option>
+          <option value="price_asc">Price: Low → High</option>
+          <option value="price_desc">Price: High → Low</option>
+          <option value="name_asc">Name: A → Z</option>
+        </select>
+      </div>
+      <button class="btn" id="btnReset">Reset</button>
+    </section>
+
+    <section id="products" class="grid"></section>
+
+    <footer>
+      <div>© <span id="year"></span> <span id="shopName2">ElectroGear Shop</span> · Hosted on Cloudflare Pages</div>
+      <div class="small">Tip: Use bundles to raise order value (Protector + Cable, Powerbank + Cable, Charger + Cable).</div>
+    </footer>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="drawerback" id="drawerback">
+    <div class="card drawer">
+      <header>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div>
+            <div style="font-weight:900;font-size:16px">Your Cart</div>
+            <div class="sub">Confirm quantities → fill details → send via WhatsApp</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn" id="btnClear">Clear</button>
+            <button class="btn" id="btnClose">Close</button>
+          </div>
+        </div>
+      </header>
+      <main>
+        <div class="cartlist" id="cartList"></div>
+
+        <div class="summary">
+          <div style="font-weight:900;margin-bottom:6px">Checkout</div>
+          <div class="sumrow"><span>Subtotal</span><b id="subtotal">RM 0.00</b></div>
+          <div class="sumrow"><span>Shipping (editable)</span><b id="shipping">RM 0.00</b></div>
+          <div class="hr"></div>
+          <div class="sumrow" style="font-size:14px"><span>Total</span><b id="total">RM 0.00</b></div>
+
+          <div style="margin-top:10px;display:grid;gap:10px">
+            <input id="custName" placeholder="Customer name" />
+            <input id="custPhone" placeholder="Customer phone (optional)" />
+            <textarea id="custAddr" rows="3" placeholder="Address / meetup location"></textarea>
+            <select id="payMethod">
+              <option value="TNG">Payment: TNG</option>
+              <option value="Bank Transfer">Payment: Bank Transfer</option>
+              <option value="COD">Payment: COD</option>
+            </select>
+            <input id="shipFee" type="number" min="0" step="0.5" placeholder="Shipping fee RM (default 0)" />
+            <button class="btn green" id="btnCheckout">Send Order on WhatsApp</button>
+            <div class="small">You will be redirected to WhatsApp with a ready-to-send order message.</div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+<script>
+  // ===== CONFIG =====
+  const CONFIG = {
+    shopName: "ElectroGear Shop",
+    shopTag: "Accessories • Fast Order • WhatsApp Checkout",
+    currency: "RM",
+    whatsappDisplay: "0177782692",
+    // WhatsApp needs country code + no leading zero:
+    whatsappNumber: "60177782692",
+    contactText: "Hi! I want to ask about accessories / price / delivery.",
+    shippingText: "KL / Cheras / Ampang",
+    payText: "TNG / Bank Transfer / COD",
+    products: [
+      { id:"tg_yellow", name:"Tempered Glass Screen Protector (Full Cover)", price:10.00, hot:true,
+        desc:"9H hardness • scratch resistant • ultra clear • smooth touch", tag:"Protector",
+        image:"/images/tempered-glass-yellow.jpg" },
+
+      { id:"pb_white", name:"Powerbank (Compact, White)", price:39.00, hot:true,
+        desc:"Portable • LED indicator • daily carry", tag:"Powerbank",
+        image:"/images/powerbank-white.jpg" },
+
+      { id:"c_c2c", name:"USB-C to USB-C Cable (Fast Charge)", price:12.00, hot:true,
+        desc:"For iPhone 15 / MacBook / iPad / Samsung", tag:"Cable",
+        image:"/images/usb-c-to-usb-c.jpg" },
+
+      { id:"c_a2c_66w", name:"USB-A to USB-C Cable 66W (6A)", price:12.00, hot:false,
+        desc:"Super fast charge • durable build", tag:"Cable",
+        image:"/images/usb-a-to-usb-c-66w.jpg" },
+
+      { id:"pb_dual", name:"Powerbank (Dual Adapter Set)", price:59.00, hot:false,
+        desc:"Includes Lightning + Micro USB adapters", tag:"Powerbank",
+        image:"/images/powerbank-dual-adapter.jpg" },
+
+      { id:"tg_black", name:"Tempered Glass Screen Protector (9H, Black Pack)", price:10.00, hot:false,
+        desc:"HD clarity • anti-fingerprint • strong edge protection", tag:"Protector",
+        image:"/images/tempered-glass-black.jpg" },
+
+      { id:"car_flexino", name:"Car Charger (Multi-Port, Built-in Cables)", price:45.00, hot:false,
+        desc:"Multiple outputs • convenient for Grab / daily driving", tag:"Car Charger",
+        image:"/images/car-charger-flexino.jpg" },
+
+      { id:"car_130w", name:"130W Car Charger + 100W USB-C Cable", price:69.00, hot:true,
+        desc:"High power • multi-port • fast charging", tag:"Car Charger",
+        image:"/images/car-charger-130w.jpg" },
+
+      { id:"psu_850w", name:"ASUS TUF Gaming PSU 850W (Gold)", price:499.00, hot:false,
+        desc:"850W • 80 Plus Gold • stable power", tag:"PC Parts",
+        image:"/images/asus-psu-850w.jpg" },
+
+      { id:"pb_50000", name:"Powerbank 50000mAh (Digital Display)", price:99.00, hot:true,
+        desc:"Huge capacity • LED % display • multi-port", tag:"Powerbank",
+        image:"/images/powerbank-50000mah.jpg" }
+    ]
+  };
+  // ==================
+
+  const $ = (s)=>document.querySelector(s);
+  const fmt = (n)=>`${CONFIG.currency} ${Number(n||0).toFixed(2)}`;
+
+  $("#shopName").textContent = CONFIG.shopName;
+  $("#shopName2").textContent = CONFIG.shopName;
+  $("#shopTag").textContent = CONFIG.shopTag;
+  $("#shippingText").textContent = CONFIG.shippingText;
+  $("#payText").textContent = CONFIG.payText;
+  $("#year").textContent = new Date().getFullYear();
+  $("#btnContact").textContent = `WhatsApp: ${CONFIG.whatsappDisplay}`;
+
+  const state = {
+    cart: loadCart(),
+    q: "",
+    sort: "hot"
+  };
+
+  function loadCart(){
+    try{ return JSON.parse(localStorage.getItem("eg_cart")||"{}"); }catch(e){ return {}; }
+  }
+  function saveCart(){ localStorage.setItem("eg_cart", JSON.stringify(state.cart)); }
+  function cartCount(){ return Object.values(state.cart).reduce((a,b)=>a+(b.qty||0),0); }
+  function cartSubtotal(){
+    let sum=0;
+    for(const it of Object.values(state.cart)) sum += it.price * it.qty;
+    return sum;
+  }
+
+  function renderProducts(){
+    let list = [...CONFIG.products];
+    const q = state.q.trim().toLowerCase();
+    if(q){
+      list = list.filter(p =>
+        (p.name||"").toLowerCase().includes(q) ||
+        (p.desc||"").toLowerCase().includes(q) ||
+        (p.tag||"").toLowerCase().includes(q)
+      );
+    }
+    if(state.sort==="hot"){
+      list.sort((a,b)=> (b.hot===true)-(a.hot===true) || a.price-b.price );
+    }else if(state.sort==="price_asc"){
+      list.sort((a,b)=>a.price-b.price);
+    }else if(state.sort==="price_desc"){
+      list.sort((a,b)=>b.price-a.price);
+    }else if(state.sort==="name_asc"){
+      list.sort((a,b)=>(a.name||"").localeCompare(b.name||""));
+    }
+
+    const el = $("#products");
+    el.innerHTML = "";
+    if(list.length===0){
+      el.innerHTML = `<div class="card prod" style="grid-column:1/-1">
+        <div style="font-weight:900">No results</div>
+        <div class="desc">Try another keyword or hit Reset.</div>
+      </div>`;
+      return;
+    }
+
+    for(const p of list){
+      const item = document.createElement("div");
+      item.className = "card prod";
+      item.innerHTML = `
+        <div class="thumb" style="padding:10px">
+  <img src="${p.image || ""}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;border-radius:14px" onerror="this.style.display='none'" />
+  <div style="display:${p.image ? "none" : "grid"};place-items:center;height:100%">${(p.tag||"ITEM")}</div>
+</div>
+
+          <div class="meta">
+          <div>
+            <div class="title">${p.name}${p.hot?` <span style="font-size:12px;color:var(--brand2)">⚡</span>`:""}</div>
+            <div class="desc">${p.desc||""}</div>
+          </div>
+          <div class="price">${fmt(p.price)}</div>
+        </div>
+        <div class="row">
+          <div class="qty">
+            <button data-act="dec" aria-label="decrease">-</button>
+            <input value="1" inputmode="numeric" />
+            <button data-act="inc" aria-label="increase">+</button>
+          </div>
+          <button class="btn primary add">Add</button>
+        </div>
+      `;
+
+      const qtyInput = item.querySelector(".qty input");
+      item.querySelector('[data-act="dec"]').onclick = ()=>{
+        qtyInput.value = Math.max(1, (parseInt(qtyInput.value||"1",10)||1) - 1);
+      };
+      item.querySelector('[data-act="inc"]').onclick = ()=>{
+        qtyInput.value = Math.min(99, (parseInt(qtyInput.value||"1",10)||1) + 1);
+      };
+      item.querySelector(".add").onclick = ()=>{
+        const qty = Math.max(1, Math.min(99, parseInt(qtyInput.value||"1",10)||1));
+        addToCart(p, qty);
+      };
+
+      el.appendChild(item);
+    }
+  }
+
+  function addToCart(p, qty){
+    const existing = state.cart[p.id];
+    if(existing) existing.qty = Math.min(99, existing.qty + qty);
+    else state.cart[p.id] = { id:p.id, name:p.name, price:p.price, qty };
+    saveCart();
+    updateCartUI();
+    toast(`Added: ${p.name} x${qty}`);
+  }
+
+  function removeFromCart(id){
+    delete state.cart[id];
+    saveCart();
+    updateCartUI();
+  }
+
+  function updateCartUI(){
+    $("#cartCount").textContent = cartCount();
+  }
+
+  function openDrawer(){ $("#drawerback").style.display = "flex"; renderCart(); }
+  function closeDrawer(){ $("#drawerback").style.display = "none"; }
+
+  function renderCart(){
+    const list = $("#cartList");
+    list.innerHTML = "";
+    const items = Object.values(state.cart);
+
+    if(items.length===0){
+      list.innerHTML = `<div class="card" style="padding:14px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.02)">
+        <div style="font-weight:900">Cart is empty</div>
+        <div class="small">Add some items first.</div>
+      </div>`;
+    }else{
+      for(const it of items){
+        const row = document.createElement("div");
+        row.className = "cartitem";
+        row.innerHTML = `
+          <div class="left">
+            <div class="mini">${it.name.slice(0,1).toUpperCase()}</div>
+            <div>
+              <div class="name">${it.name}</div>
+              <div class="muted">${fmt(it.price)} each</div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="qty">
+              <button data-act="dec">-</button>
+              <input value="${it.qty}" inputmode="numeric"/>
+              <button data-act="inc">+</button>
+            </div>
+            <button class="btn trash" title="remove">Remove</button>
+          </div>
+        `;
+        const inp = row.querySelector(".qty input");
+        row.querySelector('[data-act="dec"]').onclick = ()=>{
+          const v = Math.max(1, (parseInt(inp.value||"1",10)||1)-1);
+          inp.value = v; it.qty = v; saveCart(); renderSummary();
+        };
+        row.querySelector('[data-act="inc"]').onclick = ()=>{
+          const v = Math.min(99, (parseInt(inp.value||"1",10)||1)+1);
+          inp.value = v; it.qty = v; saveCart(); renderSummary();
+        };
+        inp.onchange = ()=>{
+          const v = Math.max(1, Math.min(99, parseInt(inp.value||"1",10)||1));
+          inp.value = v; it.qty = v; saveCart(); renderSummary();
+        };
+        row.querySelector(".trash").onclick = ()=>{ removeFromCart(it.id); renderCart(); };
+        list.appendChild(row);
+      }
+    }
+
+    $("#shipFee").value = $("#shipFee").value || "0";
+    renderSummary();
+    updateCartUI();
+  }
+
+  function renderSummary(){
+    const sub = cartSubtotal();
+    const ship = Number($("#shipFee").value||0);
+    $("#subtotal").textContent = fmt(sub);
+    $("#shipping").textContent = fmt(ship);
+    $("#total").textContent = fmt(sub + ship);
+  }
+  $("#shipFee").addEventListener("input", renderSummary);
+
+  function buildOrderMessage(){
+    const name = ($("#custName").value||"").trim();
+    const phone = ($("#custPhone").value||"").trim();
+    const addr = ($("#custAddr").value||"").trim();
+    const pay = $("#payMethod").value;
+    const ship = Number($("#shipFee").value||0);
+
+    const items = Object.values(state.cart);
+    const lines = [];
+    lines.push(`ORDER — ${CONFIG.shopName}`);
+    if(name) lines.push(`Name: ${name}`);
+    if(phone) lines.push(`Phone: ${phone}`);
+    if(addr) lines.push(`Address/Meetup: ${addr}`);
+    lines.push(`Payment: ${pay}`);
+    lines.push(`--- ITEMS ---`);
+    for(const it of items){
+      lines.push(`${it.name} x${it.qty} = ${fmt(it.price*it.qty)}`);
+    }
+    lines.push(`--- TOTAL ---`);
+    lines.push(`Subtotal: ${fmt(cartSubtotal())}`);
+    lines.push(`Shipping: ${fmt(ship)}`);
+    lines.push(`Total: ${fmt(cartSubtotal()+ship)}`);
+    lines.push(`Note: Please confirm stock & delivery time.`);
+    return lines.join("\n");
+  }
+
+  function checkout(){
+    if(Object.keys(state.cart).length===0){ toast("Cart is empty"); return; }
+    const msg = encodeURIComponent(buildOrderMessage());
+    window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, "_blank");
+  }
+
+  // Events
+  $("#btnCart").onclick = openDrawer;
+  $("#btnClose").onclick = closeDrawer;
+  $("#drawerback").onclick = (e)=>{ if(e.target.id==="drawerback") closeDrawer(); };
+  $("#btnClear").onclick = ()=>{ state.cart={}; saveCart(); renderCart(); toast("Cart cleared"); };
+  $("#btnCheckout").onclick = checkout;
+
+  $("#btnContact").onclick = ()=>{
+    const msg = encodeURIComponent(CONFIG.contactText);
+    window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`, "_blank");
+  };
+
+  $("#btnScroll").onclick = ()=> document.getElementById("products").scrollIntoView({behavior:"smooth"});
+  $("#q").addEventListener("input",(e)=>{ state.q=e.target.value; renderProducts(); });
+  $("#sort").addEventListener("change",(e)=>{ state.sort=e.target.value; renderProducts(); });
+  $("#btnReset").onclick = ()=>{ $("#q").value=""; $("#sort").value="hot"; state.q=""; state.sort="hot"; renderProducts(); };
+
+  // tiny toast
+  let toastTimer=null;
+  function toast(text){
+    let t = document.getElementById("toast");
+    if(!t){
+      t = document.createElement("div");
+      t.id="toast";
+      t.style.cssText="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);padding:10px 12px;border-radius:14px;background:rgba(15,18,34,.92);border:1px solid rgba(124,92,255,.55);color:#fff;box-shadow:0 12px 36px rgba(0,0,0,.45);z-index:9999;font-weight:900;font-size:13px;max-width:min(520px,92vw);text-align:center";
+      document.body.appendChild(t);
+    }
+    t.textContent=text;
+    t.style.display="block";
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>{t.style.display="none";},1400);
+  }
+
+  // init
+  updateCartUI();
+  renderProducts();
+  $("#hotItem").textContent = CONFIG.products.find(p=>p.hot)?.name || "—";
+</script>
+</body>
+</html>
